@@ -1,0 +1,53 @@
+﻿<form id="myForm">
+    <div class="form-group">
+        <label>Student Name</label>
+        <input type="text" class="form-control" id="stdName" name="stdName" placeholder="Enter Student Name" value="">
+    </div>
+    <div class="form-group">
+        <label>Email address</label>
+        <input type="email" class="form-control" id="stdEmail" name="stdEmail" placeholder="Enter Student Email" value="">
+    </div>
+    <div class="form-group">
+        <label>Select Hobby</label>
+        <select class="form-control" id="selectHobby" name="selectHobby">
+            <option selected>Select Hobby</option>
+            <option value="gaming">gaming</option>
+            <option value="football">football</option>
+            <option value="cricket">cricket</option>
+            <option value="hockey">hockey</option>
+            <option value="chess">chess</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit Form" />
+    </div>
+</form>
+
+<script>
+    document.getElementById('myForm').addEventListener("submit", () => {
+        debugger;
+        var stdName = document.getElementById('stdName').value;
+        var stdEmail = document.getElementById('stdEmail').value;
+        var selectHobby = document.getElementById('selectHobby').value;
+
+        if (stdName == '' || stdEmail == '' || selectHobby == 'Select Hobby') {
+            alert("Fill all fields");
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Index", "Home")',
+            data: {
+                stdName: stdName,
+                stdEmail: stdEmail,
+                selectHobby: selectHobby
+            },
+            success: function (response) {
+                console.log(response);
+            }
+        }
+        );
+
+    })
+</script>
